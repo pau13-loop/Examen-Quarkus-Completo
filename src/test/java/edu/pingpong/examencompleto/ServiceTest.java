@@ -1,4 +1,4 @@
-package edu.pingpong.activerecord;
+package edu.pingpong.examencompleto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,10 +13,10 @@ import javax.inject.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import edu.pingpong.activerecord.domain.Item;
-import edu.pingpong.activerecord.domain.Orden;
-import edu.pingpong.activerecord.domain.Usuaria;
-import edu.pingpong.activerecord.service.ServiceOlli;
+import edu.pingpong.examencompleto.domain.Item;
+import edu.pingpong.examencompleto.domain.Orden;
+import edu.pingpong.examencompleto.domain.Usuaria;
+import edu.pingpong.examencompleto.service.ServiceOlli;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
@@ -110,12 +110,12 @@ public class ServiceTest {
         Assertions.assertThat(profesor.getDestreza()).isZero();
 	}
 
-    // /**
-	//  * Implementa el metodo cargaItem del servicio.
-	//  * Devuelve el item con el nombre indicado, si existe.
-    //  * Si no existe, devuelve un objeto usuaria con sus propiedades
-    //  * y valores como se indica en los casos test.
-	//  */
+    /**
+	 * Implementa el metodo cargaItem del servicio.
+	 * Devuelve el item con el nombre indicado, si existe.
+     * Si no existe, devuelve un objeto usuaria con sus propiedades
+     * y valores como se indica en los casos test.
+	 */
 
     @Test
 	public void test_carga_item() {
@@ -135,12 +135,12 @@ public class ServiceTest {
 		Assertions.assertThat(item.getQuality()).isZero();
 	}
 
-	// /**
-	//  * Implementa el metodo cargaOrden del servicio.
-	//  * Devuelve una lista con los pedidos de la usuaria 
-	//  * con el nombre indicado, si existe.
-    //  * Si no existe, devuelve una lista vacía.
-	//  */
+	/**
+	 * Implementa el metodo cargaOrden del servicio.
+	 * Devuelve una lista con los pedidos de la usuaria 
+	 * con el nombre indicado, si existe.
+     * Si no existe, devuelve una lista vacía.
+	 */
 
     @Test
 	public void test_carga_orden() {
@@ -160,15 +160,15 @@ public class ServiceTest {
 		Assertions.assertThat(ordenes).isEmpty();
 	}
 
-    // /**
-    //  * Implementa el metodo "comanda" del servicio
-	//  * que permite a una usuaria pedir un item.
-    //  * La usuaria y el item ya existen en la bbdd (NO has de crearlos).
-	//  * 
-	//  * Guarda esta orden en su tabla en la base de datos.
-	//  * 
-    //  * El metodo devuelve la orden de tipo Orden creada.
-	//  */
+    /**
+     * Implementa el metodo "comanda" del servicio
+	 * que permite a una usuaria pedir un item.
+     * La usuaria y el item ya existen en la bbdd (NO has de crearlos).
+	 * 
+	 * Guarda esta orden en su tabla en la base de datos.
+	 * 
+     * El metodo devuelve la orden de tipo Orden creada.
+	 */
 	@Test
 	@Transactional
 	public void test_comanda_ok() {
@@ -189,11 +189,11 @@ public class ServiceTest {
 		em.find(Orden.class, pedidos.get(1).getId()).delete();
 	}
 
-	// /**
-    //  * Implementa el metodo comanda del servicio
-	//  * para que NO permita generar pedidos de productos
-	//  * si no existe la usuaria en la base de datos.
-	//  */
+	/**
+     * Implementa el metodo comanda del servicio
+	 * para que NO permita generar pedidos de productos
+	 * si no existe la usuaria en la base de datos.
+	 */
 	@Test
 	public void test_comanda_no_user() {
 		Assertions.assertThat(servicio).isNotNull();
@@ -208,11 +208,11 @@ public class ServiceTest {
         Assertions.assertThat(pedido).isNull();
 	}
     
-	// /**
-    //  * Implementa el metodo comanda del servicio
-	//  * para que NO permita generar pedidos de productos
-	//  * si no existe el item en la base de datos.
-	//  */
+	/**
+     * Implementa el metodo comanda del servicio
+	 * para que NO permita generar pedidos de productos
+	 * si no existe el item en la base de datos.
+	 */
 	@Test
 	public void test_comanda_no_item() {
 		Assertions.assertThat(servicio).isNotNull();
@@ -264,7 +264,7 @@ public class ServiceTest {
 		Assertions.assertThat(ordenes).isNotEmpty();
 		Assertions.assertThat(ordenes).size().isEqualTo(2);
 
-		TypedQuery<Orden> query = em.createQuery("select orden from Orden orden join orden.user user where user.nombre = 'Hermione'", Orden.class);
+		TypedQuery<Orden> query = em.createQuery("select orden from Orden orden join orden.usuaria usuaria where usuaria.nombre = 'Hermione'", Orden.class);
 		List<Orden> pedidos = query.getResultList();
 		
         Assertions.assertThat(pedidos).isNotNull();
@@ -293,4 +293,4 @@ public class ServiceTest {
 		List<Orden> ordenes = servicio.comandaMultiple("Hermione", Arrays.asList("Guardapelo Salazar", "Reliquias de la Muerte"));
 		Assertions.assertThat(ordenes).isEmpty();
 	}
-	}
+}

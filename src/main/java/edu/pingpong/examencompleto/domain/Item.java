@@ -24,8 +24,8 @@ public class Item extends PanacheEntityBase {
     @Column(name = "item_tipo")
     public String tipo;
 
-    @OneToOne(mappedBy = "item")
-    public Orden orden;
+    // @OneToOne(mappedBy = "item")
+    // public Orden orden;
 
     public Item() {}
 
