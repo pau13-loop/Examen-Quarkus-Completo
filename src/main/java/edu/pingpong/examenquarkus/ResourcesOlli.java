@@ -47,5 +47,16 @@ public class ResourcesOlli {
         : Response.status(Response.Status.OK).entity(usu).build();
     }
 
-
+    @POST
+    @Path("/ordena")
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response makeOrden(Orden orden) {
+        Optional<Usuaria> usu = Usuaria.find("nombre", orden.usuaria.getNombre()).firstResultOptional(); 
+        Optional<Item> item = Item.find("nombre", orden.item.getNombre()).firstResultOptional(); 
+        return usu.isPresent() && item.isPresent()? 
+        Response.status(Response.Status.CREATED).entity(service.comanda(orden.usuaria.getNombre(), orden.item.getNombre())).build()
+        : Response.status(Response.Status.NOT_FOUND).build() ;
+    }
 }
