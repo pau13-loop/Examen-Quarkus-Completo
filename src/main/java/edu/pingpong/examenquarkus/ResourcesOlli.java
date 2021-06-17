@@ -1,5 +1,9 @@
 package edu.pingpong.examenquarkus;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -52,11 +56,26 @@ public class ResourcesOlli {
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response makeOrden(Orden orden) {
+    public Response makeOrden(@Valid Orden orden) {
         Optional<Usuaria> usu = Usuaria.find("nombre", orden.usuaria.getNombre()).firstResultOptional(); 
         Optional<Item> item = Item.find("nombre", orden.item.getNombre()).firstResultOptional(); 
         return usu.isPresent() && item.isPresent()? 
         Response.status(Response.Status.CREATED).entity(service.comanda(orden.usuaria.getNombre(), orden.item.getNombre())).build()
         : Response.status(Response.Status.NOT_FOUND).build() ;
+    }
+
+    @GET 
+    @Path("/pedidos/{usuaria}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getItemsUser(@PathParam("usuaria") String nombre) {
+        List<Map<String, Object>> orderList = new ArrayList<>();
+        Map<String, Object> orders = new HashMap<>();
+
+        orders.put("user", service.cargaUsuaria(nombre));
+        service.cargaOrden(nombre).forEach(o -> orders.put("item", o.item));
+        orderList.add(orders);
+
+        return Response.status(Response.Status.OK).entity(orderList).build(); 
     }
 }
