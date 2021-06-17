@@ -1,4 +1,4 @@
-package edu.pingpong.examencompleto.service;
+package edu.pingpong.examenquarkus.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.stream.Stream;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import edu.pingpong.examencompleto.domain.Item;
-import edu.pingpong.examencompleto.domain.Usuaria;
-import edu.pingpong.examencompleto.domain.Orden;
+import edu.pingpong.examenquarkus.domain.Item;
+import edu.pingpong.examenquarkus.domain.Usuaria;
+import edu.pingpong.examenquarkus.domain.Orden;
 
 @ApplicationScoped
 public class ServiceOlli {

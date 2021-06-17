@@ -1,4 +1,4 @@
-package edu.pingpong.examencompleto.domain;
+package edu.pingpong.examenquarkus.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,8 +21,8 @@ public class Usuaria extends PanacheEntityBase {
     @Column(name = "user_prop")
     public int destreza;
 
-    @OneToOne(mappedBy = "usuaria")
-    public Orden orden;
+    // @OneToOne(mappedBy = "usuaria")
+    // public Orden orden;
 
     public Usuaria() {}
 

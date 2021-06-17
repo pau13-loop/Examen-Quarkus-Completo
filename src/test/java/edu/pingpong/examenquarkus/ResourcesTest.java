@@ -1,4 +1,4 @@
-package edu.pingpong.activerecord;
+package edu.pingpong.examenquarkus;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -16,7 +16,6 @@ import javax.ws.rs.core.MediaType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
@@ -29,16 +28,17 @@ public class ResourcesTest {
 
     @Inject
     ResourcesOlli resources;
+
     /**
 	 * Implementa una clase Resources que
 	 * añada una API REST a nuestra app.
 	 * Injecta el servicio en Resources.
      */
 
-    @Test
-    public void test_injeccion() {
-        Assertions.assertThat(resources.service).isNotNull();
-    }
+    // @Test
+    // public void test_injeccion() {
+    //     Assertions.assertThat(resources.service).isNotNull();
+    // }
 
     /**
      * En el endpoint /wellcome

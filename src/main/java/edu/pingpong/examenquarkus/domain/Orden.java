@@ -1,4 +1,4 @@
-package edu.pingpong.examencompleto.domain;
+package edu.pingpong.examenquarkus.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

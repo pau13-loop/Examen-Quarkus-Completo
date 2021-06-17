@@ -1,4 +1,4 @@
-package edu.pingpong.examencompleto;
+package edu.pingpong.examenquarkus;
 
 import io.quarkus.test.junit.NativeImageTest;
 
