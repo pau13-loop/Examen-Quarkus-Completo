@@ -78,4 +78,15 @@ public class ResourcesOlli {
 
         return Response.status(Response.Status.OK).entity(orderList).build(); 
     }
+
+    @GET 
+    @Path("/item/{nombre}")
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getItem(@PathParam("nombre") String nombre) {
+        Item item = service.cargaItem(nombre); 
+        return item.getNombre().equals("")?
+        Response.status(Response.Status.NOT_FOUND).build()
+        : Response.status(Response.Status.OK).entity(item).build();
+    }
 }
